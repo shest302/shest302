@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>shest — программист</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e8ecea; --surface:#f1f4f2; --ink:#2a3337; --muted:#5d6b70;
+  --line:#cfd7d4; --accent:#7b9187; --glow:#d3ddd8;
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.25,.1,.25,1);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1f2628; --surface:#273033; --ink:#dde4e1; --muted:#9aa8a4;
+    --line:#37423f; --accent:#8fa89c; --glow:#2c3835;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1f2628; --surface:#273033; --ink:#dde4e1; --muted:#9aa8a4;
+  --line:#37423f; --accent:#8fa89c; --glow:#2c3835;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:300;font-size:1.0625rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{width:min(100% - 3rem,44rem);margin-inline:auto}
 
+header{padding:1.75rem 0}
+header .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.logo{font-family:var(--serif);font-size:1.25rem;text-decoration:none}
+nav{display:flex;gap:1.75rem}
+nav a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .9s var(--ease)}
+nav a:hover,nav a:focus-visible{color:var(--ink)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
+
+.hero{position:relative;padding:clamp(5rem,16vh,9rem) 0 clamp(5rem,14vh,8rem);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;width:34rem;height:34rem;max-width:140vw;
+  left:50%;top:42%;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(circle,var(--glow) 0%,transparent 68%);
+  animation:breathe 14s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.hero .wrap{position:relative}
+.hero h1{
+  margin:0;font-family:var(--serif);font-weight:300;
+  font-size:clamp(4rem,15vw,8rem);line-height:1;letter-spacing:-.02em;
+}
+.role{margin:1.25rem 0 0;color:var(--muted);font-size:1.15rem}
+.lead{margin:2.25rem 0 0;max-width:32rem;font-family:var(--serif);font-weight:300;font-size:1.3rem;line-height:1.7}
+
+section{padding:clamp(3.5rem,9vw,5.5rem) 0;border-top:1px solid var(--line)}
+h2{margin:0 0 2rem;font-family:var(--serif);font-weight:400;font-size:1.9rem;letter-spacing:-.01em}
+p{margin:0 0 1.1rem}
+.muted{color:var(--muted)}
+
+.projects{list-style:none;margin:0;padding:0}
+.projects li{
+  display:grid;grid-template-columns:1fr auto;gap:.25rem 1.5rem;
+  padding:1.6rem 0;border-bottom:1px solid var(--line);
+  transition:padding-left 1s var(--ease);
+}
+.projects li:first-child{padding-top:0}
+.projects li:hover{padding-left:.75rem}
+.projects h3{margin:0;font-family:var(--serif);font-weight:400;font-size:1.3rem}
+.projects p{grid-column:1;margin:0;color:var(--muted);font-size:1rem}
+.projects .tag{grid-row:1;grid-column:2;align-self:center;color:var(--accent);font-size:.9rem}
+
+.mail{
+  display:inline-block;font-family:var(--serif);font-size:clamp(1.3rem,5vw,1.9rem);
+  text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:.15rem;
+  transition:color 1s var(--ease),border-color 1s var(--ease);
+}
+.mail:hover,.mail:focus-visible{color:var(--accent)}
+
+footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* Мягкие анимации */
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes breathe{from{opacity:.55;scale:.94}to{opacity:1;scale:1.06}}
+.hero h1,.role,.lead{animation:rise 2s var(--ease) both}
+.role{animation-delay:.5s}
+.lead{animation-delay:1s}
+.js .reveal{opacity:0;transform:translateY(8px);transition:opacity 1.6s var(--ease),transform 1.6s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+@media (max-width:30rem){
+  nav{gap:1.1rem}
+  .projects li{grid-template-columns:1fr}
+  .projects .tag{grid-row:auto;grid-column:1}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">shest</a>
+    <nav aria-label="Основная навигация">
+      <a href="#about">Обо мне</a>
+      <a href="#projects">Проекты</a>
+      <a href="#contact">Связаться</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <h1>shest</h1>
+      <p class="role">Программист · пять лет опыта</p>
+      <p class="lead">Пишу код, который спокойно работает и понятен тем, кто придёт после меня.</p>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap reveal">
+      <h2>Обо мне</h2>
+      <p>Я занимаюсь разработкой уже пять лет и за это время полюбил простые решения: аккуратную архитектуру, ясные интерфейсы и вдумчивую, неспешную работу над деталями.</p>
+      <p class="muted">Мне важно, чтобы продукт был надёжным, а код — приятным для чтения. Люблю разбираться в задаче до конца и доводить начатое до спокойного, законченного результата.</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap reveal">
+      <h2>Мои проекты</h2>
+      <ul class="projects">
+        <li>
+          <h3>Название проекта</h3>
+          <span class="tag">Скоро</span>
+          <p>Здесь появится краткое описание: что это за проект, какую задачу он решает и какие технологии использованы.</p>
+        </li>
+        <li>
+          <h3>Название проекта</h3>
+          <span class="tag">Скоро</span>
+          <p>Здесь появится краткое описание: что это за проект, какую задачу он решает и какие технологии использованы.</p>
+        </li>
+        <li>
+          <h3>Название проекта</h3>
+          <span class="tag">Скоро</span>
+          <p>Здесь появится краткое описание: что это за проект, какую задачу он решает и какие технологии использованы.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap reveal">
+      <h2>Связаться</h2>
+      <p class="muted">Буду рад новым идеям и интересным задачам. Напишите мне на почту:</p>
+      <a class="mail" href="mailto:shest302@gmail.com">shest302@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="year">2026</span> shest</div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+document.getElementById('year').textContent = new Date().getFullYear();
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, {threshold:.15});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
